@@ -1,0 +1,1 @@
+export { getCommandInput } from './getCommandInput';

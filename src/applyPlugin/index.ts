@@ -1,0 +1,1 @@
+export { applyPlugin } from './applyPlugin';

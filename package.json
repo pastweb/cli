@@ -1,0 +1,96 @@
+{
+  "name": "@pastweb/cli",
+  "version": "2.0.0",
+  "description": "utility library for cli and plugin manager creation",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/types/src/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "/dist",
+    "/README.md"
+  ],
+  "keywords": [
+    "cli",
+    "vite",
+    "plugin manager",
+    "plugin runner"
+  ],
+  "scripts": {
+    "build": "rimraf dist && rimraf doc && rollup --bundleConfigAsCjs -c",
+    "dev": "rollup --bundleConfigAsCjs -c -w",
+    "lint": "eslint ./src/**/*.{js,ts} --fix",
+    "test": "jest",
+    "test-coverage": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pastweb/cli.git"
+  },
+  "author": "Domenico Pasto",
+  "license": "MIT",
+  "peerDependencies": {
+    "@pastweb/tools": "^1.8.3",
+    "picocolors": "^1.0.0",
+    "prettyjson": "^1.2.5"
+  },
+  "devDependencies": {
+    "@betit/rollup-plugin-rename-extensions": "^0.1.0",
+    "@jest/globals": "^29.3.1",
+    "@pastweb/tools": "^1.8.3",
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-terser": "^0.2.0",
+    "@types/jest": "^29.2.5",
+    "@types/prettyjson": "^0.0.30",
+    "jest": "^29.3.1",
+    "jest-environment-jsdom": "^29.3.1",
+    "picocolors": "^1.0.0",
+    "prettyjson": "^1.2.5",
+    "rollup": "^3.7.5",
+    "rollup-plugin-cleanup": "^3.2.1",
+    "rollup-plugin-sourcemaps": "^0.6.3",
+    "rollup-plugin-typescript2": "^0.34.1",
+    "rollup-plugin-visualizer": "^5.8.3",
+    "ts-jest": "^29.0.3"
+  },
+  "exports": {
+    "./applyPlugin": {
+      "import": "./dist/modules/applyPlugin/applyPlugin.mjs",
+      "require": "./dist/modules/applyPlugin/applyPlugin.cjs"
+    },
+    "./defineHooks": {
+      "import": "./dist/modules/defineHooks/defineHooks.mjs",
+      "require": "./dist/modules/defineHooks/defineHooks.cjs"
+    },
+    "./getCommandInput": {
+      "import": "./dist/modules/getCommandInput/getCommandInput.mjs",
+      "require": "./dist/modules/getCommandInput/getCommandInput.cjs"
+    },
+    "./groupPlugins": {
+      "import": "./dist/modules/groupPlugins/groupPlugins.mjs",
+      "require": "./dist/modules/groupPlugins/groupPlugins.cjs"
+    },
+    ".": {
+      "import": "./dist/modules/index.mjs",
+      "require": "./dist/modules/index.cjs"
+    },
+    "./loadPlugins": {
+      "import": "./dist/modules/loadPlugins/loadPlugins.mjs",
+      "require": "./dist/modules/loadPlugins/loadPlugins.cjs"
+    },
+    "./normalizeArgs": {
+      "import": "./dist/modules/normalizeArgs/normalizeArgs.mjs",
+      "require": "./dist/modules/normalizeArgs/normalizeArgs.cjs"
+    },
+    "./runCommand": {
+      "import": "./dist/modules/runCommand/runCommand.mjs",
+      "require": "./dist/modules/runCommand/runCommand.cjs"
+    },
+    "./runPluginsHooks": {
+      "import": "./dist/modules/runPluginsHooks/runPluginsHooks.mjs",
+      "require": "./dist/modules/runPluginsHooks/runPluginsHooks.cjs"
+    }
+  }
+}

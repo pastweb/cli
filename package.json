@@ -1,6 +1,6 @@
 {
   "name": "@pastweb/cli",
-  "version": "2.0.1",
+  "version": "2.0.3",
   "description": "utility library for cli and plugin manager creation",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",

@@ -24,4 +24,5 @@ export type {
   Help,
   Hook,
   Hooks,
+  CommandsHook,
 } from './types';

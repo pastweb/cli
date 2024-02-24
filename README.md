@@ -7,8 +7,6 @@ Highly inspired to the vite plugin system.
 
 ```sh
 $ npm i -S @pastweb/cli
-or
-$ yarn add -S @pastweb/cli
 ```
 
 ## Usage

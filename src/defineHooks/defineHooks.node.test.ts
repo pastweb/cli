@@ -1,21 +1,22 @@
 import { defineHooks } from './defineHooks';
 import { noop } from '@pastweb/tools';
-import { Hooks, HookType } from '../types';
+import { HOOK_TYPE } from '../constants';
+import { Hooks } from '../types';
 
 const hooks: Hooks = defineHooks({
   first: {
     args: 'firstArg',
   },
   second: {
-    type: HookType.parallel,
+    type: HOOK_TYPE.parallel,
     args: ['second1', 'second2'],
     callback: noop,
   },
   third: {
-    type: HookType.waterfall,
+    type: HOOK_TYPE.waterfall,
   },
   forth: {
-    type: HookType.waterfall,
+    type: HOOK_TYPE.waterfall,
     args: () => true,
   }
 });
@@ -25,7 +26,7 @@ describe('defineHooks', () => {
     it('name hook should throw an error.', () => {
       const hook = {
         name: {
-          type: HookType.sequential,
+          type: HOOK_TYPE.sequential,
         },
       };
 
@@ -35,7 +36,7 @@ describe('defineHooks', () => {
     it('apply hook should throw an error.', () => {
       const hook = {
         apply: {
-          type: HookType.sequential,
+          type: HOOK_TYPE.sequential,
         },
       };
 
@@ -45,7 +46,7 @@ describe('defineHooks', () => {
     it('enforce hook should throw an error.', () => {
       const hook = {
         enforce: {
-          type: HookType.sequential,
+          type: HOOK_TYPE.sequential,
         },
       };
 
@@ -55,7 +56,7 @@ describe('defineHooks', () => {
 
   describe('first hook', () => {
     it('the first hook type should be "sequential"', () => {
-      expect(hooks.first.type).toBe(HookType.sequential);
+      expect(hooks.first.type).toBe(HOOK_TYPE.sequential);
     });
 
     it('the first hook args should be "firstArg"', () => {
@@ -69,7 +70,7 @@ describe('defineHooks', () => {
 
   describe('second hook', () => {
     it('the second hook type should be "parallel"', () => {
-      expect(hooks.second.type).toBe(HookType.parallel);
+      expect(hooks.second.type).toBe(HOOK_TYPE.parallel);
     });
 
     it('the second hook args should be ["second1", "second2"]', () => {
@@ -86,7 +87,7 @@ describe('defineHooks', () => {
 
   describe('third hook', () => {
     it('the third hook type should be "waterfall"', () => {
-      expect(hooks.third.type).toBe(HookType.waterfall);
+      expect(hooks.third.type).toBe(HOOK_TYPE.waterfall);
     });
 
     it('the third hook args should be undefined', () => {
@@ -100,7 +101,7 @@ describe('defineHooks', () => {
 
   describe('forth hook', () => {
     it('the forth hook type should be "waterfall"', () => {
-      expect(hooks.forth.type).toBe(HookType.waterfall);
+      expect(hooks.forth.type).toBe(HOOK_TYPE.waterfall);
     });
 
     it('the forth hook args should be a function', () => {

@@ -1,7 +1,8 @@
 import { noop } from '@pastweb/tools';
 import { normalizeArgs } from '../normalizeArgs';
 import { printError } from '../printError';
-import { Hook, HookType, PluginsOrder, PluginHooks } from '../types';
+import { HOOK_TYPE } from '../constants';
+import { Hook, PluginsOrder, PluginHooks } from '../types';
 
 export async function runHooks(
   hook: [string, Hook],
@@ -17,7 +18,7 @@ export async function runHooks(
     const args = await normalizeArgs(_args);
 
     switch(type) {
-      case HookType.sequential:
+      case HOOK_TYPE.sequential:
         await Object.entries(pluginHooks[hookName])
         .reduce((acc, [pluginName, fn]) => {
           try {
@@ -32,7 +33,7 @@ export async function runHooks(
         
         await final(order, ...args);
       break;
-      case HookType.parallel:
+      case HOOK_TYPE.parallel:
         await Promise.all(Object.entries(pluginHooks[hookName])
         .map(async ([pluginName, fn]) => {
           try {
@@ -45,7 +46,7 @@ export async function runHooks(
         }));
         await final(order, ...args);
       break;
-      case HookType.waterfall:
+      case HOOK_TYPE.waterfall:
         const job = Object.entries(pluginHooks[hookName])
         .reduce((acc, [pluginName, fn]) => {
           try {

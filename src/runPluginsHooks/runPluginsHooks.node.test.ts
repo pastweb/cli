@@ -3,7 +3,8 @@ import { runPluginsHooks } from './runPluginsHooks';
 import { defineHooks } from '../defineHooks';
 import { loadPlugins } from '../loadPlugins';
 import { getCommandInput } from '../getCommandInput';
-import { Plugin, HookType, Commands } from '../types';
+import { HOOK_TYPE } from '../constants';
+import { Plugin, Commands } from '../types';
 
 type MyPlugin = Plugin & {
   first: (...args: any[]) => void;
@@ -17,9 +18,9 @@ const finalCB = jest.fn();
 
 const hooks = defineHooks({
   first: { args: () => 'firstArg' },
-  second: { type: HookType.parallel, args: 'parallelArg', callback: parallelCB },
+  second: { type: HOOK_TYPE.parallel, args: 'parallelArg', callback: parallelCB },
   third: {
-    type: HookType.waterfall,
+    type: HOOK_TYPE.waterfall,
     args: 1,
     callback: waterfallCB,
     final: finalCB,

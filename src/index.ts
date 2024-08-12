@@ -8,7 +8,7 @@ export { printError } from './printError';
 export { printHelp } from './printHelp';
 export { printInfo } from './printInfo';
 export { printWarning } from './printWarning';
-export { HookType } from './types';
+export { HOOK_TYPE } from './constants';
 
 export type {
   Command,

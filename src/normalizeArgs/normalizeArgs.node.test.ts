@@ -1,22 +1,23 @@
 import { noop } from '@pastweb/tools';
 import { normalizeArgs } from './normalizeArgs';
 import { defineHooks } from '../defineHooks';
-import { Hooks, HookType } from '../types';
+import { HOOK_TYPE } from '../constants';
+import { Hooks } from '../types';
 
 const hooks: Hooks = defineHooks({
   first: {
     args: 'firstArg',
   },
   second: {
-    type: HookType.parallel,
+    type: HOOK_TYPE.parallel,
     args: ['second1', 'second2'],
     callback: noop,
   },
   third: {
-    type: HookType.waterfall,
+    type: HOOK_TYPE.waterfall,
   },
   forth: {
-    type: HookType.waterfall,
+    type: HOOK_TYPE.waterfall,
     args: () => true,
   }
 });

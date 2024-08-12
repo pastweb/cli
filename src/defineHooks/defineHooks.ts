@@ -1,5 +1,6 @@
 import { noop } from '@pastweb/tools';
-import { Hook, Hooks, HookType } from '../types';
+import { HOOK_TYPE } from '../constants';
+import { Hook, Hooks } from '../types';
 
 export const exclude = new Set(['name', 'apply', 'enforce']);
 
@@ -13,7 +14,7 @@ export function defineHooks(hooks: Hooks): Hooks {
 
     const { type, args, callback = noop, final = noop } = hookConf;
     const hook: Hook = {
-      type: hookName === 'commands' || !type ? HookType.sequential : type,
+      type: hookName === 'commands' || !type ? HOOK_TYPE.sequential : type,
       args,
       callback,
       final,

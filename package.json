@@ -1,14 +1,14 @@
 {
   "name": "@pastweb/cli",
-  "version": "2.0.3",
+  "version": "2.0.6",
   "description": "utility library for cli and plugin manager creation",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
-  "types": "./dist/types/src/index.d.ts",
+  "types": "./dist/types/index.d.ts",
   "sideEffects": false,
   "files": [
     "/dist",
-    "/README.md"
+    "README.md"
   ],
   "keywords": [
     "cli",
@@ -17,9 +17,7 @@
     "plugin runner"
   ],
   "scripts": {
-    "build": "rimraf dist && rimraf doc && rollup --bundleConfigAsCjs -c",
-    "dev": "rollup --bundleConfigAsCjs -c -w",
-    "lint": "eslint ./src/**/*.{js,ts} --fix",
+    "build": "rimraf dist && tsc --emitDeclarationOnly --skipLibCheck && bun ../maia/packages/maia-cli/src/cli/cli.ts build",
     "test": "jest",
     "test-coverage": "jest --coverage"
   },
@@ -30,67 +28,94 @@
   "author": "Domenico Pasto",
   "license": "MIT",
   "peerDependencies": {
-    "@pastweb/tools": "^1.8.3",
-    "picocolors": "^1.0.0",
-    "prettyjson": "^1.2.5"
+    "@pastweb/tools": "*",
+    "picocolors": "*",
+    "prettyjson": "*"
   },
   "devDependencies": {
-    "@betit/rollup-plugin-rename-extensions": "^0.1.0",
-    "@jest/globals": "^29.3.1",
-    "@pastweb/tools": "^1.8.3",
-    "@rollup/plugin-commonjs": "^24.0.0",
-    "@rollup/plugin-json": "^6.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-terser": "^0.2.0",
-    "@types/jest": "^29.2.5",
+    "@pastweb/tools": "^1.12.6",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^22.1.0",
     "@types/prettyjson": "^0.0.30",
-    "jest": "^29.3.1",
-    "jest-environment-jsdom": "^29.3.1",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "picocolors": "^1.0.0",
     "prettyjson": "^1.2.5",
-    "rollup": "^3.7.5",
-    "rollup-plugin-cleanup": "^3.2.1",
-    "rollup-plugin-sourcemaps": "^0.6.3",
-    "rollup-plugin-typescript2": "^0.34.1",
-    "rollup-plugin-visualizer": "^5.8.3",
-    "ts-jest": "^29.0.3"
+    "rimraf": "^6.0.1",
+    "ts-jest": "^29.2.4",
+    "tslib": "^2.6.2",
+    "typescript": "^5.4.5"
   },
   "exports": {
     "./applyPlugin": {
       "import": "./dist/modules/applyPlugin/applyPlugin.mjs",
-      "require": "./dist/modules/applyPlugin/applyPlugin.cjs"
+      "require": "./dist/modules/applyPlugin/applyPlugin.cjs",
+      "types": "./dist/types/applyPlugin/applyPlugin.d.ts"
+    },
+    "./constants": {
+      "import": "./dist/modules/constants.mjs",
+      "require": "./dist/modules/constants.cjs",
+      "types": "./dist/types/constants.d.ts"
     },
     "./defineHooks": {
       "import": "./dist/modules/defineHooks/defineHooks.mjs",
-      "require": "./dist/modules/defineHooks/defineHooks.cjs"
+      "require": "./dist/modules/defineHooks/defineHooks.cjs",
+      "types": "./dist/types/defineHooks/defineHooks.d.ts"
     },
     "./getCommandInput": {
       "import": "./dist/modules/getCommandInput/getCommandInput.mjs",
-      "require": "./dist/modules/getCommandInput/getCommandInput.cjs"
+      "require": "./dist/modules/getCommandInput/getCommandInput.cjs",
+      "types": "./dist/types/getCommandInput/getCommandInput.d.ts"
     },
     "./groupPlugins": {
       "import": "./dist/modules/groupPlugins/groupPlugins.mjs",
-      "require": "./dist/modules/groupPlugins/groupPlugins.cjs"
+      "require": "./dist/modules/groupPlugins/groupPlugins.cjs",
+      "types": "./dist/types/groupPlugins/groupPlugins.d.ts"
     },
     ".": {
       "import": "./dist/modules/index.mjs",
-      "require": "./dist/modules/index.cjs"
+      "require": "./dist/modules/index.cjs",
+      "types": "./dist/types/index.d.ts"
     },
     "./loadPlugins": {
       "import": "./dist/modules/loadPlugins/loadPlugins.mjs",
-      "require": "./dist/modules/loadPlugins/loadPlugins.cjs"
+      "require": "./dist/modules/loadPlugins/loadPlugins.cjs",
+      "types": "./dist/types/loadPlugins/loadPlugins.d.ts"
     },
     "./normalizeArgs": {
       "import": "./dist/modules/normalizeArgs/normalizeArgs.mjs",
-      "require": "./dist/modules/normalizeArgs/normalizeArgs.cjs"
+      "require": "./dist/modules/normalizeArgs/normalizeArgs.cjs",
+      "types": "./dist/types/normalizeArgs/normalizeArgs.d.ts"
+    },
+    "./printError": {
+      "import": "./dist/modules/printError.mjs",
+      "require": "./dist/modules/printError.cjs",
+      "types": "./dist/types/printError.d.ts"
+    },
+    "./printHelp": {
+      "import": "./dist/modules/printHelp.mjs",
+      "require": "./dist/modules/printHelp.cjs",
+      "types": "./dist/types/printHelp.d.ts"
+    },
+    "./printInfo": {
+      "import": "./dist/modules/printInfo.mjs",
+      "require": "./dist/modules/printInfo.cjs",
+      "types": "./dist/types/printInfo.d.ts"
+    },
+    "./printWarning": {
+      "import": "./dist/modules/printWarning.mjs",
+      "require": "./dist/modules/printWarning.cjs",
+      "types": "./dist/types/printWarning.d.ts"
     },
     "./runCommand": {
       "import": "./dist/modules/runCommand/runCommand.mjs",
-      "require": "./dist/modules/runCommand/runCommand.cjs"
+      "require": "./dist/modules/runCommand/runCommand.cjs",
+      "types": "./dist/types/runCommand/runCommand.d.ts"
     },
     "./runPluginsHooks": {
       "import": "./dist/modules/runPluginsHooks/runPluginsHooks.mjs",
-      "require": "./dist/modules/runPluginsHooks/runPluginsHooks.cjs"
+      "require": "./dist/modules/runPluginsHooks/runPluginsHooks.cjs",
+      "types": "./dist/types/runPluginsHooks/runPluginsHooks.d.ts"
     }
   }
 }

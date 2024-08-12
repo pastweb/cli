@@ -1,3 +1,5 @@
+import type { HOOK_TYPE } from "./constants";
+
 export type CliErrorMessage = string | Error | unknown | Record<string, any> | any[];
 
 export type CliWarningMessage = string | Record<string, any> | any[];
@@ -29,12 +31,6 @@ export type PluginHooks = {
   };
 };
 
-export enum HookType {
-  sequential = 'sequential',
-  parallel = 'parallel',
-  waterfall = 'waterfall',
-}
-
 export type HookCallback = (...args: any[]) => void;
 
 export type HookFunction = (...args: any[]) => any;
@@ -44,7 +40,7 @@ export type ArgsFunction = () => any | Promise<any>;
 export type Args = any | any[] | ArgsFunction;
 
 export type Hook = {
-  type?: HookType;
+  type?: HOOK_TYPE;
   args?: Args;
   callback?: HookCallback;
   final?: (order: string, ...args: any[]) => void;

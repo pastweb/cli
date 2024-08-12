@@ -5,9 +5,9 @@ import { Plugin, CommandsInput, HookFunction, Commands, PluginsOrder, PluginHook
 
 const exclude = new Set(['name', 'apply', 'commands', 'enforce']);
 
-export async function loadPlugins<T extends Plugin = Plugin>(
+export async function loadPlugins<T extends Plugin>(
   hooks: Hooks,
-  plugins: T[],
+  plugins: (T | T[])[],
   commandsInput: CommandsInput = {},
   includePluginCommands: string | string[] = []
 ): Promise<{
@@ -17,6 +17,7 @@ export async function loadPlugins<T extends Plugin = Plugin>(
   const include = new Set<string>(Array.isArray(includePluginCommands) ? includePluginCommands : [ includePluginCommands as string ]);
   let commands: Commands = {};
   let { args = [], ...pluginsArgs } = hooks['commands'] || {};
+  
   args = await normalizeArgs(args);
   pluginsArgs = pluginsArgs || {} as Record<string, Args>;
 
@@ -26,7 +27,7 @@ export async function loadPlugins<T extends Plugin = Plugin>(
     post: {},
   };
 
-  for await (const plugin of plugins) {
+  for await (const plugin of plugins.flat()) {
     const { name, apply, enforce } = plugin;
     if (plugin.commands && (!include.size || include.has(name))) {
       const pluginArgs = pluginsArgs[name] ? [...args, ...await normalizeArgs(pluginsArgs[name])] : args;

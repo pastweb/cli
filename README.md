@@ -161,7 +161,7 @@ If an array of commands is provided the plugin will be applied if any of the com
 If a function is provided, the function will receive the `commandInput` object and expect a `boolean` to be returned for apply or not the plugin hooks.
 
 The `enforce` property allow to mark the order of when the hooks should be called.
-The `loadPlugins` function will group by `hookName` for `pre`, `post` or `default` (if the `enforce` property is `undefined`).
+The `loadPlugins` function will group by `hookName` for `pre`, `post` or `default` (if the `enforce` property is `undefined`) and it can handle even a `multi-stage` plugin, which is pretty much an array of plugins with different order.
 The `commands` hook is a special hook used to register new commands in order to be available before the cli command execution and will gets as arguments the `commandInput` object (previously generated from the `getCommandInput` function) and the values defined in the `commands` hooks `args` definition if any. The commands registration is applyed by the `loadPlugins` function and is indipendent from the `enforce` property, if the command name is already registered, the cli will print a warning and the command will be registered as `<pluginName>:<commandName>`.
 
 ```js

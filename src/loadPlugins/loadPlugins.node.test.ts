@@ -59,8 +59,21 @@ function getPlugins() {
     first: noop,
     second: noop,
   };
+
+  const plugin6: MyPlugin[] = [
+    {
+      name: 'plugin6-pre',
+      enforce: 'pre',
+      first: noop,
+    },
+    {
+      name: 'plugin6-post',
+      enforce: 'post',
+      first: noop,
+    }
+  ];
   
-  return [plugin1, plugin2, plugin3, plugin4, plugin5];
+  return [ plugin1, plugin2, plugin3, plugin4, plugin5, plugin6 ];
 }
 
 const hooks = {
@@ -108,6 +121,11 @@ describe('loadPlugins', () => {
       expect(typeof pluginsOrder.pre.first.plugin1).toBe('function');
     });
 
+    it('the pluginsOrder.pre.first hook should has the plugin6-pre function.', async () => {
+      const { pluginsOrder } = await loadPlugins(hooks, getPlugins(), commandInput);
+      expect(typeof pluginsOrder.pre.first['plugin6-pre']).toBe('function');
+    });
+
     it('the pluginsOrder.default.first hook should has not the plugin1 function.', async () => {
       const { pluginsOrder } = await loadPlugins(hooks, getPlugins(), commandInput);
       expect(pluginsOrder.default.first.plugin1).not.toBeDefined();
@@ -131,6 +149,11 @@ describe('loadPlugins', () => {
     it('the pluginsOrder.default.second hook should has the plugin2 function.', async () => {
       const { pluginsOrder } = await loadPlugins(hooks, getPlugins(), commandInput);
       expect(typeof pluginsOrder.default.second.plugin2).toBe('function');
+    });
+
+    it('the pluginsOrder.post.first hook should has the plugin6-post function.', async () => {
+      const { pluginsOrder } = await loadPlugins(hooks, getPlugins(), commandInput);
+      expect(pluginsOrder.post.first['plugin6-post']).toBeDefined();
     });
 
     it('the pluginsOrder.post.first hook should has not the plugin2 function.', async () => {
